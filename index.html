@@ -4,186 +4,136 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>冷氣維修／保養預約</title>
-  <style>
-    body {
-      margin: 0;
-      padding: 0;
-      font-family: "微軟正黑體", sans-serif;
-      background-color: #f5f5f5;
-      color: #333;
-    }
-    /* Banner 圖片完整顯示 */
-    .banner {
-      width: 100%;
-    }
-    .banner img {
-      width: 100%;
-      height: auto;
-      display: block;
-    }
-    /* 表單區塊 */
-    .form-container {
-      max-width: 600px;
-      margin: 40px auto 80px;
-      padding: 20px;
-      background-color: #fff;
-      border-radius: 8px;
-      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-    }
-    .form-container h2 {
-      margin-bottom: 20px;
-      text-align: center;
-      color: #0070f3;
-    }
-    .form-group {
-      margin-bottom: 16px;
-    }
-    .form-group label {
-      display: block;
-      margin-bottom: 6px;
-      font-weight: bold;
-    }
-    .form-group input[type="text"],
-    .form-group input[type="email"],
-    .form-group input[type="tel"],
-    .form-group input[type="datetime-local"],
-    .form-group textarea,
-    .form-group select {
-      width: 100%;
-      padding: 10px;
-      border: 1px solid #ccc;
-      border-radius: 4px;
-      font-size: 14px;
-      box-sizing: border-box;
-    }
-    .form-group textarea {
-      resize: vertical;
-      min-height: 80px;
-    }
-    .btn-submit {
-      display: block;
-      width: 100%;
-      padding: 12px;
-      background-color: #0070f3;
-      color: #fff;
-      font-size: 16px;
-      font-weight: bold;
-      text-align: center;
-      border: none;
-      border-radius: 4px;
-      cursor: pointer;
-      margin-top: 10px;
-    }
-    .btn-submit:hover {
-      background-color: #005bb5;
-    }
-    .note {
-      font-size: 12px;
-      color: #666;
-      margin-top: 8px;
-      text-align: right;
-    }
-    @media (max-width: 480px) {
-      .form-container {
-        margin: 20px 10px 40px;
-        padding: 16px;
-      }
-    }
-  </style>
+  <!-- 引用拆出去的 CSS -->
+  <link rel="stylesheet" href="css/style.css" />
 </head>
 <body>
 
-  <!-- Banner 圖片：請將 banner.jpg 放至同目錄 -->
-  <div class="banner">
-    <img src="banner.jpg" alt="清理冷氣的三個好處 Banner" />
+<!-- ===== 頁首 (Header + Navbar) ===== -->
+<header>
+  <div class="navbar">
+    <!-- 左側 Logo / 網站名稱 -->
+    <div class="logo">淨‧空調</div>
+
+    <!-- 手機版選單切換按鈕 (visible on max-width:480px) -->
+    <div class="menu-toggle" onclick="toggleMenu()">☰</div>
+
+    <!-- 右側導覽選單 -->
+    <nav id="mainNav">
+      <ul>
+        <li><a href="#">首頁</a></li>
+
+        <!-- 帶下拉式選單的選項：服務項目 -->
+        <li>
+          <a href="#">服務項目 ▼</a>
+          <ul class="dropdown">
+            <li><a href="#service-clean">冷氣清洗</a></li>
+            <li><a href="#service-repair">冷氣維修</a></li>
+            <li><a href="#service-maintain">冷氣保養</a></li>
+          </ul>
+        </li>
+
+        <li><a href="#contact">聯絡我們</a></li>
+      </ul>
+    </nav>
   </div>
+</header>
 
-  <!-- 預約表單 -->
-  <div class="form-container">
-    <h2>冷氣維修／保養預約</h2>
-    <form id="appointmentForm">
-      <div class="form-group">
-        <label for="customerName">姓名</label>
-        <input type="text" id="customerName" name="customerName" placeholder="請輸入您的姓名" required />
-      </div>
-      <div class="form-group">
-        <label for="customerPhone">電話</label>
-        <input type="tel" id="customerPhone" name="customerPhone" placeholder="請輸入聯絡電話" required />
-      </div>
-      <div class="form-group">
-        <label for="customerEmail">Email</label>
-        <input type="email" id="customerEmail" name="customerEmail" placeholder="請輸入電子郵件" required />
-      </div>
-      <div class="form-group">
-        <label for="customerAddress">地址</label>
-        <textarea id="customerAddress" name="customerAddress" placeholder="請輸入完整地址（例如：桃園市XX路XX號）" required></textarea>
-      </div>
-      <div class="form-group">
-        <label for="serviceDatetime">預約時間</label>
-        <input type="datetime-local" id="serviceDatetime" name="serviceDatetime" required />
-      </div>
-      <div class="form-group">
-        <label for="serviceType">服務種類</label>
-        <select id="serviceType" name="serviceType" required>
-          <option value="">-- 請選擇 --</option>
-          <option value="冷氣清洗">冷氣清洗</option>
-          <option value="冷氣維修">冷氣維修</option>
-          <option value="冷氣保養">冷氣保養</option>
-        </select>
-      </div>
-      <div class="form-group">
-        <label for="customerNote">備註（選填）</label>
-        <textarea id="customerNote" name="customerNote" placeholder="例如：故障狀況描述、其他需求..."></textarea>
-      </div>
+<!-- ===== Banner 圖片 ===== -->
+<div class="banner">
+  <!-- 將您原本的冷氣清潔宣傳圖另存為 banner.jpg，放在同一資料夾 -->
+  <img src="banner.jpg" alt="清理冷氣的三個好處 Banner" />
+</div>
 
-      <button type="submit" class="btn-submit">送出預約</button>
-      <p class="note">＊提交後由網站自動寄信，不會跳出本機郵件程式。</p>
-    </form>
-  </div>
+<!-- ===== 預約表單 ===== -->
+<div class="form-container" id="contact">
+  <h2>冷氣維修／保養預約</h2>
+  <form id="appointmentForm">
+    <div class="form-group">
+      <label for="customerName">姓名</label>
+      <input type="text" id="customerName" name="customerName" placeholder="請輸入您的姓名" required />
+    </div>
+    <div class="form-group">
+      <label for="customerPhone">電話</label>
+      <input type="tel" id="customerPhone" name="customerPhone" placeholder="請輸入聯絡電話" required />
+    </div>
+    <div class="form-group">
+      <label for="customerEmail">Email</label>
+      <input type="email" id="customerEmail" name="customerEmail" placeholder="請輸入電子郵件" required />
+    </div>
+    <div class="form-group">
+      <label for="customerAddress">地址</label>
+      <textarea id="customerAddress" name="customerAddress" placeholder="請輸入完整地址（例如：桃園市XX路XX號）" required></textarea>
+    </div>
+    <div class="form-group">
+      <label for="serviceDatetime">預約時間</label>
+      <input type="datetime-local" id="serviceDatetime" name="serviceDatetime" required />
+    </div>
+    <div class="form-group">
+      <label for="serviceType">服務種類</label>
+      <select id="serviceType" name="serviceType" required>
+        <option value="">-- 請選擇 --</option>
+        <option value="冷氣清洗" id="service-clean">冷氣清洗</option>
+        <option value="冷氣維修" id="service-repair">冷氣維修</option>
+        <option value="冷氣保養" id="service-maintain">冷氣保養</option>
+      </select>
+    </div>
+    <div class="form-group">
+      <label for="customerNote">備註（選填）</label>
+      <textarea id="customerNote" name="customerNote" placeholder="例如：故障狀況描述、其他需求..."></textarea>
+    </div>
 
-  <!-- 引入 EmailJS SDK -->
-  <script src="https://cdn.jsdelivr.net/npm/emailjs-com@3/dist/email.min.js"></script>
-  <script>
-    // —— 1. 初始化 EmailJS —— 
-    emailjs.init("f840322danny@gmail.com");  // <-- 替換成你真正的 User ID
+    <button type="submit" class="btn-submit">送出預約</button>
+    <p class="note">＊提交後由網站自動寄信，不會跳出本機郵件程式。</p>
+  </form>
+</div>
 
-    // —— 2. 處理表單提交並呼叫 emailjs.send() —— 
-    document.getElementById("appointmentForm").addEventListener("submit", function(e) {
-      e.preventDefault(); // 阻止預設提交
+<!-- ===== EmailJS SDK 與 前端寄信程式碼 ===== -->
+<script src="https://cdn.jsdelivr.net/npm/emailjs-com@3/dist/email.min.js"></script>
+<script>
+  // 切換手機版選單顯示／隱藏
+  function toggleMenu() {
+    const nav = document.getElementById("mainNav");
+    nav.classList.toggle("open");
+  }
 
-      // 讀取輸入欄位值
-      const name      = document.getElementById("customerName").value.trim();
-      const phone     = document.getElementById("customerPhone").value.trim();
-      const email     = document.getElementById("customerEmail").value.trim();
-      const address   = document.getElementById("customerAddress").value.trim();
-      const datetime  = document.getElementById("serviceDatetime").value;
-      const type      = document.getElementById("serviceType").value;
-      const note      = document.getElementById("customerNote").value.trim();
+  // 初始化 EmailJS：把 YOUR_USER_ID 換成 EmailJS 後台提供的 user_xxx
+  emailjs.init("f840322danny@gmail.com");
 
-      // 組成要傳給 EmailJS 模板的參數 (Key 要跟模板裡定義的欄位名一致)
-      const templateParams = {
-        customer_name: name,
-        customer_phone: phone,
-        customer_email: email,
-        customer_address: address,
-        service_datetime: datetime,
-        service_type: type,
-        customer_note: note
-      };
+  // 處理表單提交
+  document.getElementById("appointmentForm").addEventListener("submit", function(e) {
+    e.preventDefault();
 
-      // —— 3. 呼叫 emailjs.send() —— 
-      // 把 "service_abc123xyz"、"template_yyyyyyyy" 換成你在 EmailJS 後台看到的 Service ID 和 Template ID
-      emailjs.send("service_abc123xyz", "template_yyyyyyyy", templateParams)
-        .then(function(response) {
-          // 寄信成功
-          alert("✅ 預約已成功送出，店家將儘快與您聯繫！");
-          document.getElementById("appointmentForm").reset();
-        }, function(error) {
-          // 寄信失敗：在 Console 查看具體錯誤訊息
-          console.error("EmailJS 發信失敗：", error);
-          alert("❌ 發生錯誤，無法送出預約，請稍後再試。");
-        });
-    });
-  </script>
+    // 讀取表單內容
+    const name      = document.getElementById("customerName").value.trim();
+    const phone     = document.getElementById("customerPhone").value.trim();
+    const email     = document.getElementById("customerEmail").value.trim();
+    const address   = document.getElementById("customerAddress").value.trim();
+    const datetime  = document.getElementById("serviceDatetime").value;
+    const type      = document.getElementById("serviceType").value;
+    const note      = document.getElementById("customerNote").value.trim();
+
+    // 組成 EmailJS 模板參數
+    const templateParams = {
+      customer_name: name,
+      customer_phone: phone,
+      customer_email: email,
+      customer_address: address,
+      service_datetime: datetime,
+      service_type: type,
+      customer_note: note
+    };
+
+    // 寄信：把 YOUR_SERVICE_ID、YOUR_TEMPLATE_ID 換成你在 EmailJS 後台看到的值
+    emailjs.send("YOUR_SERVICE_ID", "YOUR_TEMPLATE_ID", templateParams)
+            .then(function(response) {
+              alert("✅ 預約已成功送出，店家將儘快與您聯繫！");
+              document.getElementById("appointmentForm").reset();
+            }, function(error) {
+              console.error("EmailJS 發信失敗：", error);
+              alert("❌ 發生錯誤，無法送出預約，請稍後再試。");
+            });
+  });
+</script>
 </body>
 </html>
