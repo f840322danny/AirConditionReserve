@@ -2,116 +2,338 @@
 <html lang="zh-Hant">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>冷氣維修／保養預約</title>
-  <!-- 引用拆出去的 CSS -->
-  <link rel="stylesheet" href="css/style.css" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>冷氣維修／保養預約 – 淨‧空調</title>
+  <!-- Bootstrap 5 CSS (免費 CDN) -->
+  <link
+          href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"
+          rel="stylesheet"
+          integrity="sha384-ENjdO4Dr2bkBIFxQpeoLlVXMmLMVx1M3Q9b4hYIYhK24h5Flt8GvO5y5XapQBkz9"
+          crossorigin="anonymous"
+  />
+  <!-- Google Fonts (Noto Sans TC) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link
+          href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@300;400;700&display=swap"
+          rel="stylesheet"
+  />
+  <!-- 少量自訂 Overrides（可選） -->
+  <style>
+    body {
+      font-family: "Noto Sans TC", "微軟正黑體", sans-serif;
+    }
+    /* Hero 區文字區背景調整 */
+    #hero {
+      background-color: #f0f8ff;
+    }
+    /* Footer 背景 */
+    footer {
+      background-color: #0070f3;
+      color: #fff;
+    }
+    /* 把 Card icon 改大一點 */
+    .feature-icon {
+      font-size: 2.5rem;
+      color: #0070f3;
+    }
+  </style>
 </head>
 <body>
-
-<!-- ===== 頁首 (Header + Navbar) ===== -->
-<header>
-  <div class="navbar">
-    <!-- 左側 Logo / 網站名稱 -->
-    <div class="logo">淨‧空調</div>
-
-    <!-- 手機版選單切換按鈕 (visible on max-width:480px) -->
-    <div class="menu-toggle" onclick="toggleMenu()">☰</div>
-
-    <!-- 右側導覽選單 -->
-    <nav id="mainNav">
-      <ul>
-        <li><a href="#">首頁</a></li>
-
-        <!-- 帶下拉式選單的選項：服務項目 -->
-        <li>
-          <a href="#">服務項目 ▼</a>
-          <ul class="dropdown">
-            <li><a href="#service-clean">冷氣清洗</a></li>
-            <li><a href="#service-repair">冷氣維修</a></li>
-            <li><a href="#service-maintain">冷氣保養</a></li>
-          </ul>
+<!-- ====================================== -->
+<!--                 Navbar                -->
+<!-- ====================================== -->
+<nav class="navbar navbar-expand-lg navbar-dark bg-primary sticky-top">
+  <div class="container">
+    <a class="navbar-brand fw-bold" href="#">淨‧空調</a>
+    <button
+            class="navbar-toggler"
+            type="button"
+            data-bs-toggle="collapse"
+            data-bs-target="#mainNav"
+            aria-controls="mainNav"
+            aria-expanded="false"
+            aria-label="切換導覽"
+    >
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="mainNav">
+      <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+        <li class="nav-item">
+          <a class="nav-link active" href="#hero">首頁</a>
         </li>
-
-        <li><a href="#contact">聯絡我們</a></li>
+        <li class="nav-item">
+          <a class="nav-link" href="#features">三大好處</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#formSection">預約表單</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#footer">聯絡我們</a>
+        </li>
       </ul>
-    </nav>
+    </div>
   </div>
-</header>
+</nav>
 
-<!-- ===== Banner 圖片 ===== -->
-<div class="banner">
-  <!-- 將您原本的冷氣清潔宣傳圖另存為 banner.jpg，放在同一資料夾 -->
-  <img src="banner.jpg" alt="清理冷氣的三個好處 Banner" />
-</div>
+<!-- ====================================== -->
+<!--                 Hero                   -->
+<!-- ====================================== -->
+<section id="hero" class="py-5">
+  <div class="container">
+    <div class="row align-items-center g-5">
+      <div class="col-lg-6">
+        <h1 class="display-5 fw-bold text-primary">
+          還在忍受髒冷氣？
+        </h1>
+        <p class="lead text-secondary">
+          找專業團隊，定期清洗並保養冷氣系統，省電、更健康、涼感更快！
+        </p>
+        <a href="#formSection" class="btn btn-primary btn-lg">立即線上預約</a>
+      </div>
+      <div class="col-lg-6 text-center">
+        <img
+                src="banner.jpg"
+                alt="冷氣清洗示意圖"
+                class="img-fluid rounded shadow"
+        />
+      </div>
+    </div>
+  </div>
+</section>
 
-<!-- ===== 預約表單 ===== -->
-<div class="form-container" id="contact">
-  <h2>冷氣維修／保養預約</h2>
-  <form id="appointmentForm">
-    <div class="form-group">
-      <label for="customerName">姓名</label>
-      <input type="text" id="customerName" name="customerName" placeholder="請輸入您的姓名" required />
+<!-- ====================================== -->
+<!--           三大好處 Features            -->
+<!-- ====================================== -->
+<section id="features" class="py-5 bg-white">
+  <div class="container text-center mb-4">
+    <h2 class="fw-bold text-primary">清洗冷氣的三大好處</h2>
+    <p class="text-secondary">節能省電 ・ 改善過敏 ・ 冷氣更冷</p>
+  </div>
+  <div class="container">
+    <div class="row row-cols-1 row-cols-md-3 g-4">
+      <div class="col">
+        <div class="card h-100 border-0 shadow-sm">
+          <div class="card-body text-center">
+            <div class="feature-icon mb-3">⚡</div>
+            <h5 class="card-title fw-bold">節能省電</h5>
+            <p class="card-text text-secondary">
+              髒堵的冷氣管道讓冷媒效率下降，清洗後瞬間提升冷氣效率，省電再升級。
+            </p>
+          </div>
+        </div>
+      </div>
+      <div class="col">
+        <div class="card h-100 border-0 shadow-sm">
+          <div class="card-body text-center">
+            <div class="feature-icon mb-3">🌿</div>
+            <h5 class="card-title fw-bold">改善過敏</h5>
+            <p class="card-text text-secondary">
+              濾網與蒸發器長期堆積塵蟎、霉菌，清洗可大幅減少過敏原，呼吸更健康。
+            </p>
+          </div>
+        </div>
+      </div>
+      <div class="col">
+        <div class="card h-100 border-0 shadow-sm">
+          <div class="card-body text-center">
+            <div class="feature-icon mb-3">❄️</div>
+            <h5 class="card-title fw-bold">冷氣更冷</h5>
+            <p class="card-text text-secondary">
+              清除髒污與灰塵後，冷氣風量加大、散熱順暢，冷度馬上升級。
+            </p>
+          </div>
+        </div>
+      </div>
     </div>
-    <div class="form-group">
-      <label for="customerPhone">電話</label>
-      <input type="tel" id="customerPhone" name="customerPhone" placeholder="請輸入聯絡電話" required />
-    </div>
-    <div class="form-group">
-      <label for="customerEmail">Email</label>
-      <input type="email" id="customerEmail" name="customerEmail" placeholder="請輸入電子郵件" required />
-    </div>
-    <div class="form-group">
-      <label for="customerAddress">地址</label>
-      <textarea id="customerAddress" name="customerAddress" placeholder="請輸入完整地址（例如：桃園市XX路XX號）" required></textarea>
-    </div>
-    <div class="form-group">
-      <label for="serviceDatetime">預約時間</label>
-      <input type="datetime-local" id="serviceDatetime" name="serviceDatetime" required />
-    </div>
-    <div class="form-group">
-      <label for="serviceType">服務種類</label>
-      <select id="serviceType" name="serviceType" required>
-        <option value="">-- 請選擇 --</option>
-        <option value="冷氣清洗" id="service-clean">冷氣清洗</option>
-        <option value="冷氣維修" id="service-repair">冷氣維修</option>
-        <option value="冷氣保養" id="service-maintain">冷氣保養</option>
-      </select>
-    </div>
-    <div class="form-group">
-      <label for="customerNote">備註（選填）</label>
-      <textarea id="customerNote" name="customerNote" placeholder="例如：故障狀況描述、其他需求..."></textarea>
-    </div>
+  </div>
+</section>
 
-    <button type="submit" class="btn-submit">送出預約</button>
-    <p class="note">＊提交後由網站自動寄信，不會跳出本機郵件程式。</p>
-  </form>
-</div>
+<!-- ====================================== -->
+<!--            預約表單 Form Section       -->
+<!-- ====================================== -->
+<section id="formSection" class="py-5 bg-light">
+  <div class="container text-center mb-4">
+    <h2 class="fw-bold text-primary">線上預約冷氣維修／保養</h2>
+    <p class="text-secondary">
+      填寫以下資訊，我們將盡快與您聯繫
+    </p>
+  </div>
+  <div class="container">
+    <div class="row justify-content-center">
+      <div class="col-lg-8">
+        <div class="card border-0 shadow-sm">
+          <div class="card-body p-4 p-md-5">
+            <form id="appointmentForm">
+              <div class="row g-3">
+                <div class="col-md-6">
+                  <label for="customerName" class="form-label">姓名</label>
+                  <input
+                          type="text"
+                          id="customerName"
+                          name="customerName"
+                          class="form-control"
+                          placeholder="請輸入您的姓名"
+                          required
+                  />
+                </div>
+                <div class="col-md-6">
+                  <label for="customerPhone" class="form-label">電話</label>
+                  <input
+                          type="tel"
+                          id="customerPhone"
+                          name="customerPhone"
+                          class="form-control"
+                          placeholder="請輸入聯絡電話"
+                          required
+                  />
+                </div>
+                <div class="col-md-6">
+                  <label for="customerEmail" class="form-label">Email</label>
+                  <input
+                          type="email"
+                          id="customerEmail"
+                          name="customerEmail"
+                          class="form-control"
+                          placeholder="請輸入電子郵件"
+                          required
+                  />
+                </div>
+                <div class="col-md-6">
+                  <label for="serviceType" class="form-label">服務種類</label>
+                  <select
+                          id="serviceType"
+                          name="serviceType"
+                          class="form-select"
+                          required
+                  >
+                    <option value="">-- 請選擇 --</option>
+                    <option value="冷氣清洗">冷氣清洗</option>
+                    <option value="冷氣維修">冷氣維修</option>
+                    <option value="冷氣保養">冷氣保養</option>
+                  </select>
+                </div>
+                <div class="col-12">
+                  <label for="customerAddress" class="form-label">地址</label>
+                  <textarea
+                          id="customerAddress"
+                          name="customerAddress"
+                          class="form-control"
+                          placeholder="請輸入完整地址（例如：桃園市XX路XX號）"
+                          rows="2"
+                          required
+                  ></textarea>
+                </div>
+                <div class="col-md-6">
+                  <label for="serviceDatetime" class="form-label">預約時間</label>
+                  <input
+                          type="datetime-local"
+                          id="serviceDatetime"
+                          name="serviceDatetime"
+                          class="form-control"
+                          required
+                  />
+                </div>
+                <div class="col-md-6">
+                  <label for="customerNote" class="form-label">備註（選填）</label>
+                  <textarea
+                          id="customerNote"
+                          name="customerNote"
+                          class="form-control"
+                          placeholder="例如：故障狀況描述、其他需求..."
+                          rows="2"
+                  ></textarea>
+                </div>
+                <div class="col-12 text-center mt-3">
+                  <button type="submit" class="btn btn-primary btn-lg">
+                    送出預約
+                  </button>
+                  <div class="form-text mt-2 text-secondary">
+                    ＊提交後由網站自動寄信，不會跳出本機郵件程式
+                  </div>
+                </div>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
 
-<!-- ===== EmailJS SDK 與 前端寄信程式碼 ===== -->
+<!-- ====================================== -->
+<!--                 Footer                 -->
+<!-- ====================================== -->
+<footer id="footer" class="py-4">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-6 mb-3 mb-md-0">
+        <h5 class="fw-bold">淨‧空調</h5>
+        <p class="mb-1">桃園市・新北市 | 聯絡電話：0909-586-574</p>
+        <p class="mb-0">© 2025 淨‧空調 All rights reserved.</p>
+      </div>
+      <div class="col-md-6">
+        <h6 class="fw-bold">服務項目</h6>
+        <ul class="list-unstyled">
+          <li>分離式冷氣清洗 (室內機)</li>
+          <li>吊隱式冷氣清洗 (拆風鼓)</li>
+          <li>室外機清洗</li>
+          <li>窗型冷氣 (房間/客廳)</li>
+          <li>水冷箱型冷氣含冷卻水塔 (3RT–10RT)</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<!-- ====================================== -->
+<!--           EmailJS 與 Bootstrap JS       -->
+<!-- ====================================== -->
+<!-- Bootstrap 5 JS (含 Popper) -->
+<script
+        src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-q2kyEkc3CnrhZbz+5k0RwetlYWAPQ3R9HnPX85d5sC1mTVzdrp256RywXD4evPQp"
+        crossorigin="anonymous"
+></script>
+<!-- EmailJS SDK -->
 <script src="https://cdn.jsdelivr.net/npm/emailjs-com@3/dist/email.min.js"></script>
 <script>
-  // 切換手機版選單顯示／隱藏
-  function toggleMenu() {
-    const nav = document.getElementById("mainNav");
-    nav.classList.toggle("open");
-  }
+  // 初始化 EmailJS：把 YOUR_USER_ID 換成你在 EmailJS 後台的值
+  emailjs.init("YOUR_USER_ID");
 
-  // 初始化 EmailJS：把 YOUR_USER_ID 換成 EmailJS 後台提供的 user_xxx
-  emailjs.init("f840322danny@gmail.com");
-
-  // 處理表單提交
-  document.getElementById("appointmentForm").addEventListener("submit", function(e) {
+  // 處理表單提交事件
+  document.getElementById("appointmentForm").addEventListener("submit", function (
+          e
+  ) {
     e.preventDefault();
 
-    // 讀取表單內容
-    const name      = document.getElementById("customerName").value.trim();
-    const phone     = document.getElementById("customerPhone").value.trim();
-    const email     = document.getElementById("customerEmail").value.trim();
-    const address   = document.getElementById("customerAddress").value.trim();
-    const datetime  = document.getElementById("serviceDatetime").value;
-    const type      = document.getElementById("serviceType").value;
-    const note      = document.getElementById("customerNote").value.trim();
+    // 讀取輸入值
+    const name = document
+            .getElementById("customerName")
+            .value.trim();
+    const phone = document
+            .getElementById("customerPhone")
+            .value.trim();
+    const email = document
+            .getElementById("customerEmail")
+            .value.trim();
+    const address = document
+            .getElementById("customerAddress")
+            .value.trim();
+    const datetime = document
+            .getElementById("serviceDatetime")
+            .value;
+    const type = document
+            .getElementById("serviceType")
+            .value;
+    const note = document
+            .getElementById("customerNote")
+            .value.trim();
+
+    // 簡單檢查必填欄位
+    if (!name || !phone || !email || !address || !datetime || !type) {
+      alert("請確認已填寫所有必填欄位！");
+      return;
+    }
 
     // 組成 EmailJS 模板參數
     const templateParams = {
@@ -121,18 +343,25 @@
       customer_address: address,
       service_datetime: datetime,
       service_type: type,
-      customer_note: note
+      customer_note: note,
     };
 
-    // 寄信：把 YOUR_SERVICE_ID、YOUR_TEMPLATE_ID 換成你在 EmailJS 後台看到的值
-    emailjs.send("YOUR_SERVICE_ID", "YOUR_TEMPLATE_ID", templateParams)
-            .then(function(response) {
-              alert("✅ 預約已成功送出，店家將儘快與您聯繫！");
-              document.getElementById("appointmentForm").reset();
-            }, function(error) {
-              console.error("EmailJS 發信失敗：", error);
-              alert("❌ 發生錯誤，無法送出預約，請稍後再試。");
-            });
+    // 呼叫 EmailJS 寄信：把 YOUR_SERVICE_ID、YOUR_TEMPLATE_ID 換成你自己的
+    emailjs
+            .send("YOUR_SERVICE_ID", "YOUR_TEMPLATE_ID", templateParams)
+            .then(
+                    function (response) {
+                      alert(
+                              "✅ 預約已成功送出，店家將儘快與您聯繫！"
+                      );
+                      // 清空表單
+                      document.getElementById("appointmentForm").reset();
+                    },
+                    function (error) {
+                      console.error("EmailJS 發信失敗：", error);
+                      alert("❌ 發生錯誤，請稍後再試。");
+                    }
+            );
   });
 </script>
 </body>
