@@ -12,8 +12,7 @@
       background-color: #f5f5f5;
       color: #333;
     }
-
-    /* Banner：完整顯示，不被裁切 */
+    /* Banner 圖片完整顯示 */
     .banner {
       width: 100%;
     }
@@ -22,7 +21,6 @@
       height: auto;
       display: block;
     }
-
     /* 表單區塊 */
     .form-container {
       max-width: 600px;
@@ -95,7 +93,7 @@
 </head>
 <body>
 
-  <!-- Banner 圖片（將 banner.jpg 放在同一資料夾） -->
+  <!-- Banner 圖片：請將 banner.jpg 放至同目錄 -->
   <div class="banner">
     <img src="banner.jpg" alt="清理冷氣的三個好處 Banner" />
   </div>
@@ -138,23 +136,22 @@
         <textarea id="customerNote" name="customerNote" placeholder="例如：故障狀況描述、其他需求..."></textarea>
       </div>
 
-      <!-- 送出按鈕：使用 EmailJS 直接在前端寄信 -->
       <button type="submit" class="btn-submit">送出預約</button>
       <p class="note">＊提交後由網站自動寄信，不會跳出本機郵件程式。</p>
     </form>
   </div>
 
-  <!-- 1. 引入 EmailJS SDK -->
+  <!-- 引入 EmailJS SDK -->
   <script src="https://cdn.jsdelivr.net/npm/emailjs-com@3/dist/email.min.js"></script>
   <script>
-    // 2. 初始化 EmailJS：把下面的 YOUR_USER_ID 換成你在 EmailJS 後台看到的 user ID
-    //    範例：emailjs.init("user_abC123XYZ456");
-    emailjs.init("YOUR_USER_ID");
+    // —— 1. 初始化 EmailJS —— 
+    emailjs.init("f840322danny@gmail.com");  // <-- 替換成你真正的 User ID
 
+    // —— 2. 處理表單提交並呼叫 emailjs.send() —— 
     document.getElementById("appointmentForm").addEventListener("submit", function(e) {
-      e.preventDefault(); // 阻止預設的 form 提交
+      e.preventDefault(); // 阻止預設提交
 
-      // 3. 讀取表單欄位值
+      // 讀取輸入欄位值
       const name      = document.getElementById("customerName").value.trim();
       const phone     = document.getElementById("customerPhone").value.trim();
       const email     = document.getElementById("customerEmail").value.trim();
@@ -163,7 +160,7 @@
       const type      = document.getElementById("serviceType").value;
       const note      = document.getElementById("customerNote").value.trim();
 
-      // 4. 組成 EmailJS 模板（template）所需的參數
+      // 組成要傳給 EmailJS 模板的參數 (Key 要跟模板裡定義的欄位名一致)
       const templateParams = {
         customer_name: name,
         customer_phone: phone,
@@ -174,15 +171,15 @@
         customer_note: note
       };
 
-      // 5. 使用 EmailJS 寄信，將下方 "YOUR_SERVICE_ID"、"YOUR_TEMPLATE_ID" 換成你自己在 EmailJS 後台看到的值
-      emailjs.send("YOUR_SERVICE_ID", "YOUR_TEMPLATE_ID", templateParams)
+      // —— 3. 呼叫 emailjs.send() —— 
+      // 把 "service_abc123xyz"、"template_yyyyyyyy" 換成你在 EmailJS 後台看到的 Service ID 和 Template ID
+      emailjs.send("service_abc123xyz", "template_yyyyyyyy", templateParams)
         .then(function(response) {
           // 寄信成功
           alert("✅ 預約已成功送出，店家將儘快與您聯繫！");
-          // 清空表單
           document.getElementById("appointmentForm").reset();
         }, function(error) {
-          // 寄信失敗
+          // 寄信失敗：在 Console 查看具體錯誤訊息
           console.error("EmailJS 發信失敗：", error);
           alert("❌ 發生錯誤，無法送出預約，請稍後再試。");
         });
