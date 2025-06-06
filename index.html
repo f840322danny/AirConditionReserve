@@ -14,15 +14,17 @@
       color: #333;
     }
     /* Banner 圖片 */
+    /* 1. 直接移除 max-height 與 overflow:hidden，改用自動高度 */
+    /* 2. 移除 object-fit: cover，改成高度自動 (height: auto) 讓圖片完整顯示 */
     .banner {
       width: 100%;
-      max-height: 400px;
-      overflow: hidden;
+      /* 移除 max-height、overflow:hidden */
     }
     .banner img {
       width: 100%;
-      display: block;
-      object-fit: cover;
+      height: auto;   /* 讓圖片依寬度自動縮放高度 */
+      display: block; /* 去除底部間隙 */
+      /* 移除 object-fit 屬性，避免裁切 */
     }
     /* 表單區塊容器 */
     .form-container {
@@ -164,7 +166,7 @@
   </div>
 
   <!-- JavaScript：組成 mailto 並觸發 -->
-  <script>
+  <script src="https://cdn.jsdelivr.net/npm/emailjs-com@3/dist/email.min.js">
     document.getElementById("appointmentForm").addEventListener("submit", function(e) {
       e.preventDefault(); // 阻止表單預設送出行為
 
