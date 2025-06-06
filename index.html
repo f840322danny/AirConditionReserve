@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>冷氣維修／保養預約</title>
+  <style>
+    /* 整體排版 */
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: "微軟正黑體", sans-serif;
+      background-color: #f5f5f5;
+      color: #333;
+    }
+    /* Banner 圖片 */
+    .banner {
+      width: 100%;
+      max-height: 400px;
+      overflow: hidden;
+    }
+    .banner img {
+      width: 100%;
+      display: block;
+      object-fit: cover;
+    }
+    /* 表單區塊容器 */
+    .form-container {
+      max-width: 600px;
+      margin: 40px auto 80px;
+      padding: 20px;
+      background-color: #fff;
+      border-radius: 8px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    }
+    .form-container h2 {
+      margin-bottom: 20px;
+      text-align: center;
+      color: #0070f3;
+    }
+    /* 每一行輸入欄位 */
+    .form-group {
+      margin-bottom: 16px;
+    }
+    .form-group label {
+      display: block;
+      margin-bottom: 6px;
+      font-weight: bold;
+    }
+    .form-group input[type="text"],
+    .form-group input[type="email"],
+    .form-group input[type="tel"],
+    .form-group textarea,
+    .form-group select {
+      width: 100%;
+      padding: 10px;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+      font-size: 14px;
+      box-sizing: border-box;
+    }
+    .form-group textarea {
+      resize: vertical;
+      min-height: 80px;
+    }
+    /* 送出按鈕 */
+    .btn-submit {
+      display: block;
+      width: 100%;
+      padding: 12px;
+      background-color: #0070f3;
+      color: #fff;
+      font-size: 16px;
+      font-weight: bold;
+      text-align: center;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+      margin-top: 10px;
+    }
+    .btn-submit:hover {
+      background-color: #005bb5;
+    }
+    /* 小提示文字 */
+    .note {
+      font-size: 12px;
+      color: #666;
+      margin-top: 8px;
+      text-align: right;
+    }
+    /* 手機版微調 */
+    @media (max-width: 480px) {
+      .form-container {
+        margin: 20px 10px 40px;
+        padding: 16px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- 上方 Banner 圖片 -->
+  <div class="banner">
+    <!-- 請把您提供的那張大圖存檔為 banner.jpg，並與此 index.html 放在同一資料夾 -->
+    <img src="banner.jpg" alt="清理冷氣的三個好處 Banner" />
+  </div>
+
+  <!-- 預約表單容器 -->
+  <div class="form-container">
+    <h2>冷氣維修／保養預約</h2>
+    <form id="appointmentForm">
+      
+      <!-- 客戶姓名 -->
+      <div class="form-group">
+        <label for="customerName">姓名</label>
+        <input type="text" id="customerName" name="customerName" placeholder="請輸入您的姓名" required />
+      </div>
+
+      <!-- 電話 -->
+      <div class="form-group">
+        <label for="customerPhone">電話</label>
+        <input type="tel" id="customerPhone" name="customerPhone" placeholder="請輸入聯絡電話" required />
+      </div>
+
+      <!-- Email -->
+      <div class="form-group">
+        <label for="customerEmail">Email</label>
+        <input type="email" id="customerEmail" name="customerEmail" placeholder="請輸入電子郵件" required />
+      </div>
+
+      <!-- 地址 -->
+      <div class="form-group">
+        <label for="customerAddress">地址</label>
+        <textarea id="customerAddress" name="customerAddress" placeholder="請輸入完整地址（例如：桃園市XX路XX號）" required></textarea>
+      </div>
+
+      <!-- 服務日期／時間 -->
+      <div class="form-group">
+        <label for="serviceDatetime">預約時間</label>
+        <input type="datetime-local" id="serviceDatetime" name="serviceDatetime" required />
+      </div>
+
+      <!-- 服務種類 -->
+      <div class="form-group">
+        <label for="serviceType">服務種類</label>
+        <select id="serviceType" name="serviceType" required>
+          <option value="">-- 請選擇 --</option>
+          <option value="冷氣清洗">冷氣清洗</option>
+          <option value="冷氣維修">冷氣維修</option>
+          <option value="冷氣保養">冷氣保養</option>
+        </select>
+      </div>
+
+      <!-- 備註（選填） -->
+      <div class="form-group">
+        <label for="customerNote">備註（選填）</label>
+        <textarea id="customerNote" name="customerNote" placeholder="例如：冷氣故障狀況描述、其他需求..."></textarea>
+      </div>
+
+      <!-- 送出按鈕 -->
+      <button type="submit" class="btn-submit">送出預約</button>
+      <p class="note">＊點擊「送出預約」會開啟預設電子郵件，請在郵件視窗中確認並按「發送」。</p>
+    </form>
+  </div>
+
+  <!-- JavaScript：組成 mailto 並觸發 -->
+  <script>
+    document.getElementById("appointmentForm").addEventListener("submit", function(e) {
+      e.preventDefault(); // 阻止表單預設送出行為
+
+      // 1. 讀取表單欄位值
+      const name    = encodeURIComponent(document.getElementById("customerName").value.trim());
+      const phone   = encodeURIComponent(document.getElementById("customerPhone").value.trim());
+      const email   = encodeURIComponent(document.getElementById("customerEmail").value.trim());
+      const address = encodeURIComponent(document.getElementById("customerAddress").value.trim());
+      const datetime = encodeURIComponent(document.getElementById("serviceDatetime").value);
+      const type    = encodeURIComponent(document.getElementById("serviceType").value);
+      const note    = encodeURIComponent(document.getElementById("customerNote").value.trim());
+
+      // 2. 組成郵件主旨與內文
+      const mailtoTo = "f840322danny@gmail"; 
+      // 請將上面的 shop@example.com 改成您店家的真實信箱！
+      const subject = encodeURIComponent("【冷氣預約】" + name + " / " + type);
+      let bodyText  = "";
+      bodyText += "客戶姓名： " + name + "%0D%0A";
+      bodyText += "聯絡電話： " + phone + "%0D%0A";
+      bodyText += "Email： " + email + "%0D%0A";
+      bodyText += "住址： " + address + "%0D%0A";
+      bodyText += "預約時間： " + datetime + "%0D%0A";
+      bodyText += "服務種類： " + type + "%0D%0A";
+      if (note) {
+        bodyText += "備註： " + note + "%0D%0A";
+      }
+
+      // 3. 組成 mailto URL
+      const mailtoLink = `mailto:${mailtoTo}?subject=${subject}&body=${bodyText}`;
+
+      // 4. 以跳轉方式開啟預設信件程式
+      window.location.href = mailtoLink;
+    });
+  </script>
+</body>
+</html>
